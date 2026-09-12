@@ -9,7 +9,7 @@
 	--color-primario: #ff6347;
 	--color-fondo: #f0f0f0;
 	--color-texto: #333;
-	--color-texto-secundario: #4a4848;
+	--color-texto-secundario: #504848;
 	--color-blanco: #fff;
 	--color-borde: #ddd;
 	--color-focus: #ff4500;
@@ -79,6 +79,23 @@ main {
 #resultado.success {
 	color: #014c07;
 	text-align: center;
+}
+
+/* LOGIN / REGISTRO */
+.link__registro,
+.link__login {
+	text-align: center;
+	color: var(--color-texto-secundario);
+}
+
+.link__registro a,
+.link__login a {
+	text-decoration: none;
+	color: var(--color-primario);
+	&:hover {
+		color: var(--color-focus);
+		text-decoration: underline;
+	}
 }
 
 /* CATEGORÍAS */
