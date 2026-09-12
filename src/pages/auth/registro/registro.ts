@@ -1,14 +1,14 @@
 import "../../../style.css";
 import type { IUser } from "../../../types/IUser";
 import { getUsers, saveUsers } from "../../../utils/localStorage";
+import { toggleFormView } from "../../../utils/toggleFormView";
 
 const form = document.querySelector<HTMLFormElement>("#registro");
 const result = document.querySelector<HTMLDivElement>("#resultado");
+const linkLogin = document.querySelector<HTMLParagraphElement>(".link__login");
 
 form?.addEventListener("submit", (event: SubmitEvent) => {
 	event.preventDefault();
-
-	console.log("== Formulario Enviado ==");
 
 	const formElement = event.currentTarget as HTMLFormElement;
 	const formData = new FormData(formElement); // Extrae los datos del formulario
@@ -24,46 +24,41 @@ form?.addEventListener("submit", (event: SubmitEvent) => {
 	const users = getUsers();
 	const emailExist = users.some((user) => user.email === newUser.email);
 
-	if (emailExist && result) {
-		form.style.display = "none";
-		result.className = "error";
-		result.style.display = "block";
-		result.innerHTML = `<h3>Este email ya está registrado</h3>
-    <p>Probá con otro email o iniciá sesión.</p>`;
+	if (emailExist) {
+		toggleFormView({
+			form,
+			result,
+			link: linkLogin,
+			showForm: false,
+			resultState: "error",
+			resultHtml: `<h3>Este email ya está registrado</h3>
+			<p>Probá con otro email o iniciá sesión.</p>`,
+		});
 
 		setTimeout(() => {
-			if (result) {
-				result.style.display = "none";
-				form.style.display = "";
-			}
+			toggleFormView({ form, result, link: linkLogin, showForm: true });
 		}, 3000);
-
 		return;
 	}
 
 	users.push(newUser);
 	saveUsers(users);
 
-	console.log(localStorage);
-
 	// Mostrar los resultados en pantalla
-	if (result) {
-		form.style.display = "none";
-		result.className = "success";
-		result.style.display = "block";
-		result.innerHTML = `<h3>Usuario Registrado</h3>
-    <p><strong>Email:</strong> ${newUser.email.toUpperCase()}</p>
-    <p><strong>Password:</strong> ******** </p>`;
-	}
+	toggleFormView({
+		form,
+		result,
+		link: linkLogin,
+		showForm: false,
+		resultState: "success",
+		resultHtml: `<h3>Usuario Registrado</h3>
+    <p><strong>Email:</strong> ${newUser.email.toUpperCase()}</p>`,
+	});
+
+	setTimeout(() => {
+		toggleFormView({ form, result, link: linkLogin, showForm: true });
+	}, 3000);
 
 	// Limpiar formulario
 	formElement.reset();
-
-	// Ocultamos resultado después de 5 segundos
-	setTimeout(() => {
-		if (result) {
-			result.style.display = "none";
-			form.style.display = ""; // si no especifico nada, recupera el layout que tenia en el css
-		}
-	}, 5000);
 });

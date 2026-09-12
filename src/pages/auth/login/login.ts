@@ -1,14 +1,14 @@
 import "../../../style.css";
 import { saveUser, getUsers } from "../../../utils/localStorage";
 import { redirection } from "../../../main";
+import { toggleFormView } from "../../../utils/toggleFormView";
 
 const form = document.getElementById("registro") as HTMLFormElement;
 const result = document.querySelector<HTMLDivElement>("#resultado");
 const inputEmail = document.getElementById("email") as HTMLInputElement;
 const inputPassword = document.getElementById("password") as HTMLInputElement;
+const linkRegistro = document.querySelector<HTMLParagraphElement>(".link__registro");
 
-// Al intentar ingresar, buscar en el array de "users" si existe una coincidencia de email y contraseña.
-// Si es correcto, guardar el objeto del usuario en la clave "userData" para iniciar la sesión.
 form?.addEventListener("submit", (e: SubmitEvent) => {
 	e.preventDefault();
 
@@ -22,21 +22,19 @@ form?.addEventListener("submit", (e: SubmitEvent) => {
 	);
 
 	if (!userExist) {
-		if (result) {
-			form.style.display = "none";
-			result.className = "error";
-			result.style.display = "block";
-			result.innerHTML = `<h3>Email o contraseña incorrectos.</h3>
-			<p>Verificá tus datos e intentá de nuevo.</p>`;
-		}
+		toggleFormView({
+			form,
+			result,
+			link: linkRegistro,
+			showForm: false,
+			resultState: "error",
+			resultHtml: `<h3>Email o contraseña incorrectos.</h3>
+			<p>Verificá tus datos e intentá de nuevo.</p>`,
+		});
 
 		setTimeout(() => {
-			if (result) {
-				result.style.display = "none";
-				form.style.display = "";
-			}
+			toggleFormView({ form, result, link: linkRegistro, showForm: true });
 		}, 3000);
-
 		return;
 	}
 
