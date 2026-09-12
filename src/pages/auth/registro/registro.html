@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<title>Registro - FoodStore</title>
+	</head>
+
+	<body>
+		<header>
+			<h1 class="title">🍕 Food Store</h1>
+		</header>
+
+		<main id="form-container">
+			<h2>REGISTRO</h2>
+			<div id="resultado"></div>
+			<form id="registro">
+				<div>
+					<label for="email">Email</label>
+					<input
+						type="email"
+						id="email"
+						name="email"
+						autocomplete="email"
+						placeholder="example@example.com"
+						required
+					/>
+				</div>
+				<div>
+					<label for="password">Password</label>
+					<input
+						type="password"
+						id="password"
+						name="password"
+						autocomplete="new-password"
+						placeholder="********"
+						required
+						minlength="4"
+					/>
+				</div>
+
+				<button class="form__button" type="submit">Enviar</button>
+			</form>
+		</main>
+
+		<footer>
+			<p>&copy; 2026 Food Store. Todos los derechos reservados.</p>
+			<p>Contacto:<a href="#">info@foodstore.com</a></p>
+		</footer>
+
+		<script type="module" src="./registro.ts"></script>
+	</body>
+</html>

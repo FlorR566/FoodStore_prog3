@@ -1,0 +1,359 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+	--color-primario: #ff6347;
+	--color-fondo: #f0f0f0;
+	--color-texto: #333;
+	--color-texto-secundario: #4a4848;
+	--color-blanco: #fff;
+	--color-borde: #ddd;
+	--color-focus: #ff4500;
+	--radius-sm: 5px;
+	--radius-md: 8px;
+	--sombra-focus: 0 0 5px rgba(255, 69, 0, 0.4);
+}
+
+/* ESTILOS BASE (MOBILE FIRST) */
+body {
+	background-color: var(--color-fondo);
+	color: var(--color-texto-secundario);
+	line-height: 1.5;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+header,
+aside,
+footer {
+	background-color: var(--color-blanco);
+	padding: 1rem;
+	border-bottom: 1px solid var(--color-borde);
+}
+
+main {
+	width: 90%;
+	background-color: var(--color-blanco);
+	border-radius: 8px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+	border: 1px solid var(--color-borde);
+	padding: 2rem;
+	margin: auto;
+}
+
+.title {
+	color: var(--color-primario);
+	font-weight: 600;
+	font-size: 2rem;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: 1px;
+	margin-bottom: 0.8rem;
+}
+
+.navbar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.navbar a {
+	text-decoration: none;
+	color: var(--color-texto-secundario);
+	font-weight: bold;
+	font-size: 0.95rem;
+}
+
+/* FORMULARIOS */
+#resultado.error {
+	color: var(--color-primario);
+	text-align: center;
+}
+
+#resultado.success {
+	color: #014c07;
+	text-align: center;
+}
+
+/* CATEGORÍAS */
+aside h2 {
+	font-size: 1.2rem;
+	margin-bottom: 0.8rem;
+	text-align: center;
+}
+
+#lista-categorias {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+#lista-categorias a {
+	color: var(--color-texto-secundario);
+	text-decoration: none;
+	padding: 0.4rem 0.8rem;
+	border: 1px solid var(--color-borde);
+	border-radius: 20px;
+	background-color: var(--color-fondo);
+	font-size: 0.85rem;
+	display: inline-block;
+}
+
+main h2 {
+	text-align: center;
+	margin-bottom: 1.2rem;
+	font-size: 1.4rem;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 2rem;
+}
+
+input {
+	width: 100%;
+	height: 40px;
+	padding: 0.6rem;
+	border: 1px solid var(--color-borde);
+	border-radius: var(--radius-sm);
+	font-size: 0.95rem;
+}
+
+input:focus {
+	outline: none;
+	border-color: var(--color-focus);
+	box-shadow: var(--sombra-focus);
+}
+
+.form__button {
+	background-color: var(--color-primario);
+	color: var(--color-blanco);
+	border-radius: var(--radius-sm);
+	border: none;
+	height: 40px;
+	font-weight: 700;
+	font-size: 0.95rem;
+	cursor: pointer;
+}
+
+/* GRILLA Y TARJETAS DE PRODUCTOS */
+#contenedor-productos {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.prod-destacado {
+	background-color: var(--color-blanco);
+	border: 1px solid var(--color-borde);
+	border-radius: var(--radius-md);
+	padding: 1rem;
+	text-align: center;
+	display: grid;
+	align-content: space-between;
+}
+
+.prod-destacado img {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	border-radius: var(--radius-sm);
+	margin-bottom: 0.8rem;
+}
+
+.prod-destacado h3 {
+	font-size: 1.1rem;
+	margin-bottom: 0.4rem;
+}
+
+.prod-destacado p {
+	font-size: 0.9rem;
+	margin-bottom: 0.5rem;
+}
+
+.prod-destacado p strong {
+	color: var(--color-focus);
+	font-size: 1.1rem;
+}
+
+.prod-destacado button {
+	width: 100%;
+	padding: 0.6rem;
+	margin-top: 0.4rem;
+	border: none;
+	border-radius: var(--radius-sm);
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.prod-destacado .btn-detalles {
+	background-color: transparent;
+	border: 1px solid var(--color-primario); /* especificidad la especificidad en las etiquetas para mantener el border */
+	color: var(--color-primario);
+}
+
+.btn-agregar {
+	background-color: var(--color-primario);
+	color: var(--color-blanco);
+}
+
+/* INTERACCIÓN TÁCTIL MÓVIL (AGRUPADA) */
+.navbar a:active,
+.prod-destacado p strong {
+	color: var(--color-focus);
+}
+
+#lista-categorias a:active {
+	background-color: var(--color-primario);
+	color: var(--color-blanco);
+}
+
+.form__button:active,
+.btn-agregar:active {
+	background-color: var(--color-focus);
+}
+
+.btn-detalles:active {
+	background-color: var(--color-borde);
+}
+
+/* Efecto de hundimiento común para todos los botones en celular */
+.form__button:active,
+.btn-detalles:active,
+.btn-agregar:active {
+	transform: scale(0.98);
+}
+
+/* FOOTER */
+footer {
+	margin-top: auto;
+	border-top: 1px solid var(--color-borde);
+	text-align: center;
+	font-size: 0.85rem;
+}
+
+footer a {
+	color: var(--color-primario);
+	text-decoration: none;
+}
+
+/* MEDIA QUERIES */
+
+/* Tablets (≥ 600px) */
+@media (min-width: 600px) {
+	.navbar {
+		flex-direction: row;
+		justify-content: center;
+		gap: 1.5rem;
+	}
+
+	#contenedor-productos {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/* FORMULARIOS */
+	#form-container {
+		width: 600px;
+		margin: auto;
+	}
+
+	#registro {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+/* Escritorio (≥ 992px) */
+@media (min-width: 992px) {
+	header {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		width: 100%;
+		margin: 0 auto;
+		line-height: 2;
+	}
+
+	.title {
+		margin-bottom: 0;
+		font-size: 1.8rem;
+	}
+
+	.navbar {
+		flex-direction: row;
+		gap: 1.8rem;
+	}
+
+	main,
+	aside {
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	aside {
+		background-color: transparent;
+		border-bottom: none;
+	}
+
+	#contenedor-productos {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.prod-destacado {
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	/* FORMULARIOS */
+	#form-container {
+		width: 600px;
+		max-width: 100%;
+		margin: auto;
+		display: grid;
+		place-items: center;
+	}
+
+	#registro {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	/* HOVERS EN ESCRITORIO (AGRUPADOS) */
+	.form__button:hover,
+	.btn-agregar:hover {
+		color: var(--color-blanco);
+		background-color: var(--color-focus);
+	}
+
+	.navbar a:hover {
+		color: var(--color-focus);
+	}
+
+	#lista-categorias a:hover {
+		color: var(--color-blanco);
+		background-color: var(--color-primario);
+	}
+
+	.btn-detalles:hover {
+		background-color: var(--color-fondo);
+	}
+
+	.prod-destacado:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+	}
+}
