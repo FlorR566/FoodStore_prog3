@@ -1,4 +1,4 @@
-# Food Store - Evaluación 1 (Programación 3)
+# FoodStore - Evaluación 1 (Programación 3)
 
 Proyecto de e-commerce / catálogo de alimentos desarrollado para la **Evaluación 1** de **Programación 3** (Tecnicatura Universitaria en Programación - UTN).
 
