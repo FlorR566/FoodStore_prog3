@@ -1,15 +1,53 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-		<title>Document</title>
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<title>FoodStore - Home</title>
 	</head>
-
 	<body>
-		<h1>Hola desde el cliente</h1>
-		<button id="logoutButton">Logout</button>
+		<header>
+			<h1 class="title">🍕 FoodStore</h1>
+			<!-- NAVEGACION -->
+			<nav class="navbar">
+				<a
+					href="home.html
+				"
+					>Inicio</a
+				>
+
+				<a href="#">Catálogo</a>
+
+				<a href="#">Carrito (0)</a>
+
+				<button id="logoutButton">Logout</button>
+			</nav>
+		</header>
+
+		<aside>
+			<!-- BARRA LATERAL -->
+			<h2>Categorías</h2>
+			<ul id="lista-categorias"></ul>
+		</aside>
+
+		<main>
+			<!-- BUSCADOR -->
+			<form>
+				<input id="buscar-prod" type="text" placeholder="Buscar productos ..." />
+			</form>
+
+			<!-- GRILLA DE PRODUCTOS -->
+			<h2>Productos destacados</h2>
+			<section id="contenedor-productos"></section>
+		</main>
+
+		<footer>
+			<p>&copy; 2026 FoodStore. Todos los derechos reservados.</p>
+			<p>Contacto:<a href="#">info@foodstore.com</a></p>
+		</footer>
+
+		<script src="./js/data.js"></script>
 		<script type="module" src="./home.ts"></script>
 	</body>
 </html>
