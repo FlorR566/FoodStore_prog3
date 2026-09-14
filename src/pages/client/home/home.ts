@@ -1,7 +1,9 @@
 import "../../../style.css";
 import { checkAuthUser, logout } from "../../../main"; // <-- la redirección pasa por main.ts
+import { addToCart } from "../cart/cart";
 import { PRODUCTS, getCategories } from "../../../data/data";
 import type { IProduct } from "../../../types/product";
+import { mostrarFeedback } from "../../../utils/toast";
 
 // Elementos del DOM
 const buttonLogout = document.querySelector<HTMLButtonElement>("#logout-button");
@@ -35,31 +37,7 @@ const renderProductos = (lista: IProduct[]): void => {
 		`,
 		)
 		.join("");
-
-	contenedorProductos.addEventListener("click", (event: MouseEvent) => {
-		const target = event.target as HTMLBRElement;
-		if (target.tagName !== "BUTTON") return;
-
-		const id = target.dataset.id;
-		if (!id) return;
-
-		const producto = PRODUCTS.find((p) => p.id === Number(id));
-		if (!producto) return;
-
-		mostrarFeedback(`${producto.nombre} agregado al carrito`);
-	});
 };
-
-function mostrarFeedback(mensaje: string): void {
-	const toast = document.createElement("div");
-	toast.className = "toast";
-	toast.textContent = mensaje;
-	document.body.appendChild(toast);
-
-	setTimeout(() => {
-		toast.remove();
-	}, 2000);
-}
 
 const aplicarFiltros = (): void => {
 	const texto = inputBuscar?.value.trim().toLowerCase() ?? "";
@@ -116,6 +94,20 @@ formBuscar?.addEventListener("submit", (event: SubmitEvent) => {
 
 inputBuscar?.addEventListener("input", () => {
 	aplicarFiltros(); // búsqueda en tiempo real
+});
+
+contenedorProductos?.addEventListener("click", (event: MouseEvent) => {
+	const target = event.target as HTMLButtonElement;
+	if (target.tagName !== "BUTTON") return;
+
+	const id = target.dataset.id;
+	if (!id) return;
+
+	const producto = PRODUCTS.find((p) => p.id === Number(id));
+	if (!producto) return;
+
+	addToCart(producto);
+	mostrarFeedback(`${producto.nombre} agregado al carrito`);
 });
 
 window.addEventListener("pageshow", (event: PageTransitionEvent) => {
