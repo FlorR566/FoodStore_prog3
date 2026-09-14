@@ -242,6 +242,35 @@ input:focus {
 	color: var(--color-blanco);
 }
 
+/* Toasts Component (MENSAJE FLOTANTE */
+.toast {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background: #2e7d32;
+	color: white;
+	padding: 0.75rem 1.25rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	animation: fadeInOut 2s ease forwards;
+	z-index: 1000;
+}
+
+@keyframes fadeInOut {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	10%,
+	90% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
 /* INTERACCIÓN TÁCTIL MÓVIL (AGRUPADA) */
 .navbar a:active,
 .prod-destacado p strong {

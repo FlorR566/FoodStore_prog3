@@ -30,12 +30,36 @@ const renderProductos = (lista: IProduct[]): void => {
 				<p>${p.descripcion}</p>
 				<p class="precio">$${p.precio.toLocaleString("es-AR")}</p>
 				${!p.disponible ? `<span class="badge-agotado">Sin stock</span>` : ""}
-				<button type="submit">Agregar al Carrito</button>
+				<button type="button" data-id="${p.id}" ${!p.disponible ? "disabled" : ""}>Agregar al Carrito</button>
 			</article>
 		`,
 		)
 		.join("");
+
+	contenedorProductos.addEventListener("click", (event: MouseEvent) => {
+		const target = event.target as HTMLBRElement;
+		if (target.tagName !== "BUTTON") return;
+
+		const id = target.dataset.id;
+		if (!id) return;
+
+		const producto = PRODUCTS.find((p) => p.id === Number(id));
+		if (!producto) return;
+
+		mostrarFeedback(`${producto.nombre} agregado al carrito`);
+	});
 };
+
+function mostrarFeedback(mensaje: string): void {
+	const toast = document.createElement("div");
+	toast.className = "toast";
+	toast.textContent = mensaje;
+	document.body.appendChild(toast);
+
+	setTimeout(() => {
+		toast.remove();
+	}, 2000);
+}
 
 const aplicarFiltros = (): void => {
 	const texto = inputBuscar?.value.trim().toLowerCase() ?? "";
