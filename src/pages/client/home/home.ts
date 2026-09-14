@@ -3,19 +3,17 @@ import { checkAuthUser, logout } from "../../../main"; // <-- la redirección pa
 import { PRODUCTS, getCategories } from "../../../data/data";
 import type { IProduct } from "../../../types/product";
 
-const buttonLogout = document.getElementById("logout-button") as HTMLButtonElement;
-buttonLogout?.addEventListener("click", () => {
-	logout();
-});
-
+// Elementos del DOM
+const buttonLogout = document.querySelector<HTMLButtonElement>("#logout-button");
 const contenedorProductos = document.querySelector<HTMLElement>("#contenedor-productos");
 const listaCategorias = document.querySelector<HTMLUListElement>("#lista-categorias");
 const inputBuscar = document.querySelector<HTMLInputElement>("#buscar-prod");
 const formBuscar = document.querySelector<HTMLFormElement>("form");
 
+// Estado de la página
 let categoriaActivaId: number | null = null;
 
-function renderProductos(lista: IProduct[]) {
+const renderProductos = (lista: IProduct[]): void => {
 	if (!contenedorProductos) return;
 
 	if (lista.length === 0) {
@@ -37,29 +35,9 @@ function renderProductos(lista: IProduct[]) {
 		`,
 		)
 		.join("");
-}
+};
 
-function renderCategorias() {
-	if (!listaCategorias) return;
-
-	const categorias = getCategories();
-
-	listaCategorias.innerHTML = `
-		<li><button data-categoria-id="">Todas</button></li>
-		${categorias.map((cat) => `<li><button data-categoria-id="${cat.id}">${cat.nombre}</button></li>`).join("")}
-	`;
-
-	listaCategorias.addEventListener("click", (event) => {
-		const target = event.target as HTMLButtonElement;
-		if (target.tagName !== "BUTTON") return;
-
-		const id = target.dataset.categoriaId;
-		categoriaActivaId = id ? Number(id) : null;
-		aplicarFiltros();
-	});
-}
-
-function aplicarFiltros() {
+const aplicarFiltros = (): void => {
 	const texto = inputBuscar?.value.trim().toLowerCase() ?? "";
 
 	const filtrados = PRODUCTS.filter((p) => {
@@ -73,9 +51,41 @@ function aplicarFiltros() {
 	});
 
 	renderProductos(filtrados);
-}
+};
 
-formBuscar?.addEventListener("submit", (event) => {
+const renderCategorias = (): void => {
+	if (!listaCategorias) return;
+
+	const categorias = getCategories();
+
+	listaCategorias.innerHTML = `
+		<li><button data-categoria-id="">Todas</button></li>
+		${categorias.map((cat) => `<li><button data-categoria-id="${cat.id}">${cat.nombre}</button></li>`).join("")}
+	`;
+
+	listaCategorias.addEventListener("click", (event: MouseEvent) => {
+		const target = event.target as HTMLButtonElement;
+		if (target.tagName !== "BUTTON") return;
+
+		const id = target.dataset.categoriaId;
+		categoriaActivaId = id ? Number(id) : null;
+		aplicarFiltros();
+	});
+};
+
+const initPage = (): void => {
+	console.log("inicio de pagina");
+	checkAuthUser("/src/pages/auth/login/login.html", "/src/pages/admin/home/home.html", "client");
+	renderCategorias();
+	renderProductos(PRODUCTS.filter((p) => !p.eliminado));
+};
+
+// Event Listeners e Inicialización
+buttonLogout?.addEventListener("click", () => {
+	logout();
+});
+
+formBuscar?.addEventListener("submit", (event: SubmitEvent) => {
 	event.preventDefault();
 	aplicarFiltros();
 });
@@ -84,16 +94,10 @@ inputBuscar?.addEventListener("input", () => {
 	aplicarFiltros(); // búsqueda en tiempo real
 });
 
-const initPage = () => {
-	console.log("inicio de pagina");
-	checkAuthUser("/src/pages/auth/login/login.html", "/src/pages/admin/home/home.html", "client");
-	renderCategorias();
-	renderProductos(PRODUCTS.filter((p) => !p.eliminado));
-};
-initPage(); // corre la carga normal
-
 window.addEventListener("pageshow", (event: PageTransitionEvent) => {
 	if (event.persisted) {
 		initPage(); // corre de nuevo si la página vino del bfcache (ej: botón "atrás")
 	}
 });
+
+initPage(); // corre la carga normal
