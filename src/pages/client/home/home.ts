@@ -32,8 +32,12 @@ const renderProductos = (lista: IProduct[]): void => {
 				<h3>${p.nombre}</h3>
 				<p>${p.descripcion}</p>
 				<p><strong>$${p.precio.toLocaleString("es-AR")}</strong></p>
-				${!p.disponible ? `<span class="badge-agotado">Sin stock</span>` : ""}
-				<button type="button" class="btn-agregar" data-id="${p.id}" ${!p.disponible ? "disabled" : ""}>Agregar al Carrito</button>
+				${
+					p.disponible
+						? `<button type="button" class="btn-agregar" data-id="${p.id}">Agregar al Carrito</button>`
+						: `<span class="badge-agotado">Sin stock</span>`
+				}
+				
 			</article>
 		`,
 		)
