@@ -10,7 +10,7 @@ export default defineConfig({
 				authRegistro: resolve(import.meta.dirname, "src/pages/auth/registro/registro.html"),
 				adminHome: resolve(import.meta.dirname, "src/pages/admin/home/home.html"),
 				clientHome: resolve(import.meta.dirname, "src/pages/client/home/home.html"),
-				//clientCart: resolve(import.meta.dirname, "src/pages/client/cart/cart.html"),
+				clientCart: resolve(import.meta.dirname, "src/pages/client/cart/cart.html"),
 			},
 		},
 	},

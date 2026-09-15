@@ -12,3 +12,11 @@ export interface IProduct {
 	disponible: boolean;
 	categorias: ICategory[];
 }
+
+export interface ICartItem {
+	id: number;
+	nombre: string;
+	precio: number;
+	imagen: string;
+	cantidad: number;
+}

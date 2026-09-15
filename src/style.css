@@ -13,6 +13,7 @@
 	--color-blanco: #fff;
 	--color-borde: #ddd;
 	--color-focus: #ff4500;
+	--color-success: #2e7d32;
 	--radius-sm: 5px;
 	--radius-md: 8px;
 	--sombra-focus: 0 0 5px rgba(255, 69, 0, 0.4);
@@ -33,6 +34,13 @@ footer {
 	background-color: var(--color-blanco);
 	padding: 1rem;
 	border-bottom: 1px solid var(--color-borde);
+}
+
+header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 main {
@@ -57,16 +65,23 @@ main {
 
 .navbar {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 0.6rem;
+	gap: 0.5rem;
 }
 
 .navbar a {
 	text-decoration: none;
 	color: var(--color-texto-secundario);
-	font-weight: bold;
+	font-weight: 400;
 	font-size: 0.95rem;
+	padding: 0.5rem 0.75rem;
+	border-radius: 6px;
+}
+
+.navbar a.active {
+	font-weight: bold;
+	text-decoration: underline;
+	color: var(--color-primario);
+	pointer-events: none; /* evita el click una vez que ya estamos ahí*/
 }
 
 /* FORMULARIOS */
@@ -76,7 +91,7 @@ main {
 }
 
 #resultado.success {
-	color: #014c07;
+	color: var(--color-success);
 	text-align: center;
 }
 
@@ -136,15 +151,19 @@ input:focus {
 	cursor: pointer;
 }
 
-/* ASIDE - CATEGORÍAS barra lateral */
+/* ASIDE - CATEGORÍAS barra lateral (MOOBILE FIRST) */
 .layout {
 	display: flex;
-	gap: 2rem;
-	background-color: #014c07;
+	flex-direction: column; /* apilado en mobile */
+	gap: 1.5rem;
+	width: 90%;
+	margin: 1.5rem auto;
 }
 
 .sidebar {
-	background: #f5f5f5;
+	background: var(--color-blanco);
+	border: 1px solid var(--color-borde);
+	border-radius: var(--radius-md);
 	padding: 1rem;
 }
 
@@ -177,7 +196,8 @@ input:focus {
 
 .sidebar button.active {
 	background: #d9633b;
-	color: white;
+	background: var(--color-focus);
+	color: var(--color-fondo);
 	font-weight: bold;
 }
 
@@ -196,6 +216,7 @@ input:focus {
 	text-align: center;
 	display: grid;
 	align-content: space-between;
+	min-height: 320px;
 }
 
 .prod-destacado img {
@@ -242,13 +263,196 @@ input:focus {
 	color: var(--color-blanco);
 }
 
+.badge-agotado {
+	display: inline-block;
+	background-color: #ffe0e0;
+	color: #c0392b;
+	font-size: 0.75rem;
+	font-weight: bold;
+	padding: 0.2rem 0.5rem;
+	border-radius: var(--radius-sm);
+	margin-bottom: 0.4rem;
+}
+
+/* Toasts Component (MENSAJE FLOTANTE */
+.toast {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background: var(--color-success);
+	color: white;
+	padding: 0.75rem 1.25rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	animation: fadeInOut 2s ease forwards;
+	z-index: 1000;
+}
+
+@keyframes fadeInOut {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	10%,
+	90% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+/* BOTON LOGOUT */
+#logout-button {
+	background-color: transparent;
+	color: #e53935;
+	border: 1.5px solid #e53935;
+	padding: 0 0.5rem;
+	font-size: 0.9rem;
+	font-weight: 400;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+
+	&:hover {
+		background-color: #e53935;
+		color: white;
+	}
+}
+
+/* CARRITO - contenedor de items */
+#contenedor-carrito {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin: 1.5rem 0;
+}
+
+.cart-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 1rem;
+	border: 1px solid var(--color-borde);
+	border-radius: var(--radius-md);
+	background: var(--color-blanco);
+}
+
+.cart-item img {
+	width: 100%;
+	max-width: 140px;
+	height: 140px;
+	object-fit: cover;
+	border-radius: var(--radius-sm);
+}
+
+.cart-item h3 {
+	margin: 0 0 0.25rem;
+	font-size: 1rem;
+}
+
+.cart-item p {
+	margin: 0.1rem 0;
+	color: #555;
+	font-size: 0.9rem;
+}
+
+.btn-eliminar {
+	background: none;
+	border: 1px solid #d9633b;
+	color: #d9633b;
+	padding: 0.4rem 0.8rem;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.85rem;
+	white-space: nowrap;
+}
+
+.btn-eliminar:hover {
+	background: #d9633b;
+	color: white;
+}
+
+/* Carrito vacío */
+.carrito-vacio {
+	text-align: center;
+	color: #777;
+	padding: 2rem 0;
+	font-size: 1.05rem;
+}
+
+/* CONTROL DE CANTIDAD EN CARRITO */
+.cantidad-control {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.cantidad-control button {
+	width: 28px;
+	height: 28px;
+	border: 1px solid var(--color-borde);
+	border-radius: var(--radius-sm);
+	background: var(--color-blanco);
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+	color: var(--color-texto-secundario);
+}
+
+.cantidad-control button:hover {
+	background: var(--color-fondo);
+}
+
+.cantidad-control span {
+	min-width: 20px;
+	text-align: center;
+	font-weight: 600;
+}
+
+#btn-finalizar {
+	font-size: 1.3rem;
+	margin-top: 0.5rem;
+	width: 100%;
+	border-radius: var(--radius-md);
+	width: 300px;
+	height: 50px;
+}
+
+#btn-finalizar:disabled {
+	background-color: var(--color-borde);
+	color: #999;
+	cursor: not-allowed;
+}
+
+/* Resumen / total */
+.carrito-resumen {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 1rem 0;
+	border-top: 2px solid #eee;
+	margin-top: 1rem;
+}
+
+.carrito-resumen p {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+#total-carrito {
+	color: #d9633b;
+}
+
 /* INTERACCIÓN TÁCTIL MÓVIL (AGRUPADA) */
 .navbar a:active,
 .prod-destacado p strong {
 	color: var(--color-focus);
 }
 
-#lista-categorias a:active {
+#lista-categorias button:active {
 	background-color: var(--color-primario);
 	color: var(--color-blanco);
 }
@@ -292,9 +496,38 @@ footer a {
 		gap: 1.5rem;
 	}
 
+	.layout {
+		flex-direction: row;
+		align-items: flex-start;
+	}
+
+	.sidebar {
+		flex: 0 0 200px;
+		position: sticky;
+		top: 100px;
+		align-self: flex-start;
+	}
+
+	.layout main {
+		flex: 1;
+	}
+
 	#contenedor-productos {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
+		min-height: 55dvh;
+	}
+
+	.cart-item {
+		display: grid;
+		grid-template-columns: 80px 1fr auto;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.cart-item img {
+		width: 80px;
+		height: 80px;
 	}
 
 	/* FORMULARIOS */
@@ -327,19 +560,7 @@ footer a {
 
 	.navbar {
 		flex-direction: row;
-		gap: 1.8rem;
-	}
-
-	main,
-	aside {
-		max-width: 1100px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	aside {
-		background-color: transparent;
-		border-bottom: none;
+		gap: 1.25rem;
 	}
 
 	#contenedor-productos {
@@ -350,6 +571,13 @@ footer a {
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
+	}
+
+	#contenedor-carrito,
+	.carrito-resumen {
+		max-width: 700px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	/* FORMULARIOS */
@@ -376,11 +604,6 @@ footer a {
 
 	.navbar a:hover {
 		color: var(--color-focus);
-	}
-
-	#lista-categorias a:hover {
-		color: var(--color-blanco);
-		background-color: var(--color-primario);
 	}
 
 	.btn-detalles:hover {
