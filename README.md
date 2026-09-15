@@ -2,6 +2,9 @@
 
 Proyecto de e-commerce / catálogo de alimentos desarrollado para la **Evaluación 1** de **Programación 3** (Tecnicatura Universitaria en Programación - UTN).
 
+## Enlace al video
+[Explicación del Código]()
+
 ## Descripción del Proyecto
 
 - **Catálogo de Productos**: Visualización dinámica de productos con tarjetas e información detallada.
@@ -71,34 +74,36 @@ El proyecto respeta la arquitectura modular establecida en las consignas:
 
 ```text
 src/
-├── main.ts              # Punto de entrada JS/TS global
-├── style.css            # Estilos globales de la aplicación
-├── vite-env.d.ts        # Tipado de entorno de Vite
-├── data/                # Datos estáticos (PRODUCTS y getCategories)
+├── main.ts                 # Punto de entrada JS/TS global
+├── style.css               # Estilos globales de la aplicación
+├── vite-env.d.ts           # Tipado de entorno de Vite
+├── data/                   # Datos estáticos (PRODUCTS y getCategories)
 │   └── data.ts
 ├── pages/
-│   ├── admin/           # Vistas de administración
+│   ├── admin/              # Vistas de administración
 │   │   └── home/
 │   │       ├── home.html
 │   │       └── home.ts
-│   ├── auth/            # Vistas de autenticación
+│   ├── auth/               # Vistas de autenticación
 │   │   ├── login/
 │   │   └── registro/
-│   └── client/          # Vistas del cliente desarrolladas para el parcial
+│   └── client/             # Vistas del cliente desarrolladas para el parcial
 │       ├── cart/
 │       │   ├── cart.html
 │       │   └── cart.ts
 │       └── home/
 │           ├── home.html
 │           └── home.ts
-├── types/               # Interfaces y definiciones TypeScript
+├── types/                  # Interfaces y definiciones TypeScript
 │   ├── categoria.ts
 │   ├── IUser.ts
 │   ├── product.ts
 │   └── Rol.ts
-└── utils/               # Funciones auxiliares y lógica reutilizable
-    ├── auth.ts
-    ├── cart.ts          # Lógica del carrito (localStorage)
-    ├── localStorage.ts
-    └── navigate.ts
+└── utils/                  # Funciones auxiliares y lógica reutilizable
+    ├── auth.ts             # Control de sesión, permisos por rol y redirecciones
+    ├── cart.ts             # Lógica del carrito y persistencia en localStorage
+    ├── localStorage.ts     # Manejo de localStorage
+    ├── navigate.ts         # Navegación entre páginas
+    ├── toast.ts            # Notificaciones flotantes
+    └── toggleFormView.ts   # Alternancia entre login y registro
 ```
