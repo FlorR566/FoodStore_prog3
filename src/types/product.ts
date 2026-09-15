@@ -14,7 +14,9 @@ export interface IProduct {
 }
 
 export interface ICartItem {
-	producto: IProduct; // Referencia al producto completo
-	cantidad: number; // Unidades seleccionadas por el cliente
-	subtotal: number; // Precio acumulado (producto.precio * cantidad)
+	id: number;
+	nombre: string;
+	precio: number;
+	imagen: string;
+	cantidad: number;
 }
