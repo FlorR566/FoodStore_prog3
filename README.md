@@ -2,8 +2,8 @@
 
 Proyecto de e-commerce / catálogo de alimentos desarrollado para la **Evaluación 1** de **Programación 3** (Tecnicatura Universitaria en Programación - UTN).
 
-## Enlace al video
-[Explicación del Código]()
+## Enlace al video
+[Explicación del Código](https://youtu.be/_Q4GwMaL3TA)
 
 ## Descripción del Proyecto
 
