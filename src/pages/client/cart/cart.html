@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="stylesheet" href="../../../style.css" />
+		<title>FoodStore - Carrito</title>
+	</head>
+	<body>
+		<header>
+			<h1 class="title">🍕 FoodStore</h1>
+			<!-- NAVEGACION -->
+			<nav class="navbar">
+				<a href="../home/home.html">Catálogo</a>
+				<a href="../cart/cart.html" id="link-carrito" class="active">Carrito (0)</a>
+				<button id="logout-button">Logout</button>
+			</nav>
+		</header>
+
+		<main>
+			<h2>Tu Carrito</h2>
+			<div id="contenedor-carrito"></div>
+			<div class="carrito-resumen">
+				<p>Total: <span id="total-carrito">$0</span></p>
+			</div>
+		</main>
+
+		<footer>
+			<p>&copy; 2026 FoodStore. Todos los derechos reservados.</p>
+			<p>Contacto:<a href="#">info@foodstore.com</a></p>
+		</footer>
+
+		<script type="module" src="./cart.ts"></script>
+	</body>
+</html>
