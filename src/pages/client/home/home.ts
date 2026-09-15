@@ -27,13 +27,13 @@ const renderProductos = (lista: IProduct[]): void => {
 	contenedorProductos.innerHTML = lista
 		.map(
 			(p) => `
-			<article class="producto-card">
+			<article class="producto-destacado">
 				<img src="/src/assets/${p.imagen}" alt="${p.nombre}" />
 				<h3>${p.nombre}</h3>
 				<p>${p.descripcion}</p>
-				<p class="precio">$${p.precio.toLocaleString("es-AR")}</p>
+				<p><strong>$${p.precio.toLocaleString("es-AR")}</strong></p>
 				${!p.disponible ? `<span class="badge-agotado">Sin stock</span>` : ""}
-				<button type="button" data-id="${p.id}" ${!p.disponible ? "disabled" : ""}>Agregar al Carrito</button>
+				<button type="button" class="btn-agregar" data-id="${p.id}" ${!p.disponible ? "disabled" : ""}>Agregar al Carrito</button>
 			</article>
 		`,
 		)
