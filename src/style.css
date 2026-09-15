@@ -143,15 +143,19 @@ input:focus {
 	cursor: pointer;
 }
 
-/* ASIDE - CATEGORÍAS barra lateral */
+/* ASIDE - CATEGORÍAS barra lateral (MOOBILE FIRST) */
 .layout {
 	display: flex;
-	gap: 2rem;
-	background-color: #014c07;
+	flex-direction: column; /* apilado en mobile */
+	gap: 1.5rem;
+	width: 90%;
+	margin: 1.5rem auto;
 }
 
 .sidebar {
-	background: #f5f5f5;
+	background: var(--color-blanco);
+	border: 1px solid var(--color-borde);
+	border-radius: var(--radius-md);
 	padding: 1rem;
 }
 
@@ -203,6 +207,7 @@ input:focus {
 	text-align: center;
 	display: grid;
 	align-content: space-between;
+	min-height: 320px;
 }
 
 .prod-destacado img {
@@ -339,9 +344,22 @@ footer a {
 		gap: 1.5rem;
 	}
 
+	.layout {
+		flex-direction: row;
+		align-items: flex-start;
+	}
+
+	.sidebar {
+		flex: 0 0 200px;
+	}
+
+	.layout main {
+		flex: 1;
+	}
 	#contenedor-productos {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
+		min-height: 55dvh;
 	}
 
 	/* FORMULARIOS */
@@ -377,18 +395,6 @@ footer a {
 		gap: 1.25rem;
 	}
 
-	main,
-	aside {
-		max-width: 1100px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	aside {
-		background-color: transparent;
-		border-bottom: none;
-	}
-
 	#contenedor-productos {
 		grid-template-columns: repeat(3, 1fr);
 	}
@@ -397,6 +403,10 @@ footer a {
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
+	}
+
+	.main-carrito {
+		max-width: 800px;
 	}
 
 	/* FORMULARIOS */

@@ -27,7 +27,7 @@ const renderProductos = (lista: IProduct[]): void => {
 	contenedorProductos.innerHTML = lista
 		.map(
 			(p) => `
-			<article class="producto-destacado">
+			<article class="prod-destacado">
 				<img src="/src/assets/${p.imagen}" alt="${p.nombre}" />
 				<h3>${p.nombre}</h3>
 				<p>${p.descripcion}</p>
