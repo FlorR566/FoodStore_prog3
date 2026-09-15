@@ -24,7 +24,7 @@ const renderCarrito = (): void => {
 		.map(
 			(item) => `
 			<article class="cart-item" data-id="${item.id}">
-				<img src="/src/assets/${item.imagen}" alt="${item.nombre}" />
+				<img src="/images/${item.imagen}" alt="${item.nombre}" />
 				<h3>${item.nombre}</h3>
 				<p>Cantidad: ${item.cantidad}</p>
 				<p>Subtotal: $${getSubtotal(item).toLocaleString("es-AR")}</p>

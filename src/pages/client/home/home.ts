@@ -28,7 +28,7 @@ const renderProductos = (lista: IProduct[]): void => {
 		.map(
 			(p) => `
 			<article class="prod-destacado">
-				<img src="/src/assets/${p.imagen}" alt="${p.nombre}" />
+				<img src="/images/${p.imagen}" alt="${p.nombre}" />
 				<h3>${p.nombre}</h3>
 				<p>${p.descripcion}</p>
 				<p><strong>$${p.precio.toLocaleString("es-AR")}</strong></p>
