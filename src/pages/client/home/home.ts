@@ -1,9 +1,10 @@
 import "../../../style.css";
 import { checkAuthUser, logout } from "../../../main"; // <-- la redirección pasa por main.ts
-import { addToCart } from "../cart/cart";
+import { addToCart } from "../../../utils/cart";
 import { PRODUCTS, getCategories } from "../../../data/data";
 import type { IProduct } from "../../../types/product";
 import { mostrarFeedback } from "../../../utils/toast";
+import { updateCartBadge } from "../../../utils/cartBadge";
 
 // Elementos del DOM
 const buttonLogout = document.querySelector<HTMLButtonElement>("#logout-button");
@@ -80,6 +81,7 @@ const initPage = (): void => {
 	checkAuthUser("/src/pages/auth/login/login.html", "/src/pages/admin/home/home.html", "client");
 	renderCategorias();
 	renderProductos(PRODUCTS.filter((p) => !p.eliminado));
+	updateCartBadge();
 };
 
 // Event Listeners e Inicialización
@@ -107,6 +109,7 @@ contenedorProductos?.addEventListener("click", (event: MouseEvent) => {
 	if (!producto) return;
 
 	addToCart(producto);
+	updateCartBadge();
 	mostrarFeedback(`${producto.nombre} agregado al carrito`);
 });
 
