@@ -188,6 +188,7 @@ input:focus {
 
 .sidebar button.active {
 	background: #d9633b;
+	background: var(--color-focus);
 	color: white;
 	font-weight: bold;
 }
@@ -433,11 +434,6 @@ footer a {
 
 	.navbar a:hover {
 		color: var(--color-focus);
-	}
-
-	#lista-categorias button:hover {
-		color: var(--color-blanco);
-		background-color: var(--color-primario);
 	}
 
 	.btn-detalles:hover {

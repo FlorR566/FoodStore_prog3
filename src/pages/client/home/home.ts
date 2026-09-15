@@ -65,11 +65,14 @@ const renderCategorias = (): void => {
 		<li><button data-categoria-id="">Todas</button></li>
 		${categorias.map((cat) => `<li><button data-categoria-id="${cat.id}">${cat.nombre}</button></li>`).join("")}
 	`;
+	listaCategorias.querySelector("button")?.classList.add("active");
 
 	listaCategorias.addEventListener("click", (event: MouseEvent) => {
 		const target = event.target as HTMLButtonElement;
 		if (target.tagName !== "BUTTON") return;
 
+		listaCategorias.querySelectorAll("button").forEach((btn) => btn.classList.remove("active"));
+		target.classList.add("active");
 		const id = target.dataset.categoriaId;
 		categoriaActivaId = id ? Number(id) : null;
 		aplicarFiltros();
