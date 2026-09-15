@@ -1,6 +1,6 @@
 import "../../../style.css";
 import { checkAuthUser, logout } from "../../../main";
-import { getCart, saveCart, getSubtotal, getTotal } from "../../../utils/cart";
+import { getCart, saveCart, getSubtotal, getTotal, updateQuantity } from "../../../utils/cart";
 import { updateCartBadge } from "../../../utils/cartBadge";
 
 // Elementos del DOM
@@ -26,7 +26,11 @@ const renderCarrito = (): void => {
 			<article class="cart-item" data-id="${item.id}">
 				<img src="/images/${item.imagen}" alt="${item.nombre}" />
 				<h3>${item.nombre}</h3>
-				<p>Cantidad: ${item.cantidad}</p>
+				<div class="cantidad-control">
+					<button type="button" class="btn-restar" data-id="${item.id}">−</button>
+					<span>${item.cantidad}</span>
+					<button type="button" class="btn-sumar" data-id="${item.id}">+</button>
+				</div>
 				<p>Subtotal: $${getSubtotal(item).toLocaleString("es-AR")}</p>
 				<button type="button" data-id="${item.id}" class="btn-eliminar">Quitar</button>
 			</article>
@@ -57,11 +61,25 @@ buttonLogout?.addEventListener("click", () => logout());
 
 contenedorCarrito?.addEventListener("click", (event: MouseEvent) => {
 	const target = event.target as HTMLButtonElement;
-	if (!target.classList.contains("btn-eliminar")) return;
-
 	const id = target.dataset.id;
 	if (!id) return;
-	eliminarItem(Number(id));
+
+	if (target.classList.contains("btn-eliminar")) {
+		eliminarItem(Number(id));
+		return;
+	}
+
+	if (target.classList.contains("btn-sumar")) {
+		updateQuantity(Number(id), 1);
+		renderCarrito();
+		return;
+	}
+
+	if (target.classList.contains("btn-restar")) {
+		updateQuantity(Number(id), -1);
+		renderCarrito();
+		return;
+	}
 });
 
 window.addEventListener("pageshow", (event: PageTransitionEvent) => {

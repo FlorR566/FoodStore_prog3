@@ -47,3 +47,18 @@ export function addToCart(producto: IProduct): ICartItem[] {
 	saveCart(cart);
 	return cart;
 }
+
+export const updateQuantity = (id: number, delta: number): ICartItem[] => {
+	const cart = getCart();
+	const item = cart.find((i) => i.id === id);
+
+	if (!item) return cart;
+
+	item.cantidad += delta;
+
+	// Si llega a 0 o menos, se elimina del carrito
+	const nuevoCart = item.cantidad <= 0 ? cart.filter((i) => i.id !== id) : cart;
+
+	saveCart(nuevoCart);
+	return nuevoCart;
+};
