@@ -2,8 +2,9 @@
 
 Proyecto de e-commerce / catálogo de alimentos desarrollado para la **Evaluación 1** de **Programación 3** (Tecnicatura Universitaria en Programación - UTN).
 
-## Enlace al video
-[Explicación del Código](https://youtu.be/_Q4GwMaL3TA)
+### Enlace al video: [Explicación del Código](https://youtu.be/_Q4GwMaL3TA)
+
+### Visitar el sitio: [FoodStore](https://foodstore-prog3.vercel.app/src/pages/auth/login/login.html)
 
 ## Descripción del Proyecto
 
@@ -15,7 +16,7 @@ Proyecto de e-commerce / catálogo de alimentos desarrollado para la **Evaluaci�
 
 ## Tecnologías y Herramientas
 
-- **Lenguajes:** HTML5, CSS3, TypeScript, JavaScript (ES6+).
+- **Lenguajes:** HTML5, CSS3, TypeScript.
 - **Entorno y Bundler:** Node.js, Vite.
 - **Gestor de Paquetes:** `pnpm`
 - **Persistencia:** `localStorage` (Claves: `"cart"`, `"users"`, `"userData"`).
